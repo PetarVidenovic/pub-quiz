@@ -1,0 +1,22 @@
+{
+  "name": "Pub Kviz Master",
+  "description": "Profesionalni sistem za vo\u0111enje pub kvizova",
+  "repository": "https://github.com/yourusername/pub-kviz-master",
+  "keywords": [
+    "pub quiz",
+    "kviz",
+    "takmicenje",
+    "game"
+  ],
+  "env": {
+    "PORT": {
+      "description": "Port na kome radi server",
+      "value": "65432"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    }
+  ]
+}

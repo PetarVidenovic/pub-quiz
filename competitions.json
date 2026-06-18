@@ -1,0 +1,1246 @@
+[
+  {
+    "id": "1781688777.6453643",
+    "name": "pub",
+    "date": "17.06.2026 11:32",
+    "timestamp": 1781688777.6454437,
+    "teams": [
+      {
+        "name": "Tim1",
+        "members": [],
+        "player_name": "Igrač1",
+        "score": 70,
+        "correct_count": 8,
+        "fastest_response": 1.2281205654144287,
+        "response_times": [
+          4.5132787227630615,
+          2.6664798259735107,
+          1.6278836727142334,
+          1.5244617462158203,
+          1.536041498184204,
+          1.5934937000274658,
+          1.1883585453033447,
+          8.111788988113403,
+          1.294804334640503,
+          1.2281205654144287
+        ]
+      },
+      {
+        "name": "sdd",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "sim",
+        "score": 0,
+        "correct_count": 0,
+        "fastest_response": null,
+        "response_times": []
+      }
+    ],
+    "questions": [
+      {
+        "question": "Legenda kaže da su dečaka Rimljani bacili lavovima,ne znajući kako dečak ima retku veštinu komunikacije sa lavovima.Dečak nije bio rastrgan kako su mislili Rimljani,nego se toliko zbližio s lavovima,da mu je jedan od njih bio bodyguard.U blizini je  sagrađen stadion uz nekadašnji samostan i nazvan je po dečaku-svecu,igrači kluba koji igraju na stadion samim tim imaju nadimak lavovi.O kom slavnom stadionu i klubu je rec?",
+        "options": [
+          "Marakana,Crvena zvezda",
+          "Olimpiko,FK Roma",
+          "San Mames,Athletic Bilbao",
+          "Sa \"Meace\",Inter"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja životinja je poznata po svojoj sposobnosti da se kreće unazad?",
+        "options": [
+          "Rak",
+          "Kornjača",
+          "Vidra",
+          "Zmija"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji poznati naucnik je otkrio strukturu DNK?",
+        "options": [
+          "Frensis Krik",
+          "Rosalind Franklin",
+          "Gregor Mendel",
+          "Carls Darvin"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji element ima simbol \"Na\"?",
+        "options": [
+          "Magnezijum",
+          "Natrijum",
+          "Neon",
+          "Nikl"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji deo tela ima najvišu koncentraciju receptora za bol u dermisu?",
+        "options": [
+          "Koža šaka",
+          "Koža lica",
+          "Koža tabana",
+          "Koža vrata"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je najvisi planinski vrh u Severnoj Americi?",
+        "options": [
+          "Mont Everest",
+          "Denali",
+          "Kilimandzaro",
+          "Monblan"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je najviši vodopad na svetu?",
+        "options": [
+          "Viktorijini vodopadi",
+          "Nijagarini vodopadi",
+          "Anđeoski vodopad",
+          "Iguazu vodopadi"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja država ima najviše lingvističkih porodica koje su klasifikovane kao neodređene?",
+        "options": [
+          "Papua Nova Gvineja",
+          "Meksiko",
+          "Brazil",
+          "Australija"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Autor romana \"Zločin i kazna\"je?",
+        "options": [
+          "Fjodor Dostojevski",
+          "Lav Tolstoj",
+          "Anton Pavlovič Čehov",
+          "Nikolaj Gogolj"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja planeta ima najizraženiju atmosferu sa ugljen-dioksidom?",
+        "options": [
+          "Venera",
+          "Mars",
+          "Zemlja",
+          "Titan"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781688777.5661037",
+    "name": "pub",
+    "date": "17.06.2026 11:32",
+    "timestamp": 1781688777.5661845,
+    "teams": [
+      {
+        "name": "Tim1",
+        "members": [],
+        "player_name": "Igrač1",
+        "score": 70,
+        "correct_count": 8,
+        "fastest_response": 1.2281205654144287,
+        "response_times": [
+          4.5132787227630615,
+          2.6664798259735107,
+          1.6278836727142334,
+          1.5244617462158203,
+          1.536041498184204,
+          1.5934937000274658,
+          1.1883585453033447,
+          8.111788988113403,
+          1.294804334640503,
+          1.2281205654144287
+        ]
+      },
+      {
+        "name": "sdd",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "sim",
+        "score": 0,
+        "correct_count": 0,
+        "fastest_response": null,
+        "response_times": []
+      }
+    ],
+    "questions": [
+      {
+        "question": "Legenda kaže da su dečaka Rimljani bacili lavovima,ne znajući kako dečak ima retku veštinu komunikacije sa lavovima.Dečak nije bio rastrgan kako su mislili Rimljani,nego se toliko zbližio s lavovima,da mu je jedan od njih bio bodyguard.U blizini je  sagrađen stadion uz nekadašnji samostan i nazvan je po dečaku-svecu,igrači kluba koji igraju na stadion samim tim imaju nadimak lavovi.O kom slavnom stadionu i klubu je rec?",
+        "options": [
+          "Marakana,Crvena zvezda",
+          "Olimpiko,FK Roma",
+          "San Mames,Athletic Bilbao",
+          "Sa \"Meace\",Inter"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja životinja je poznata po svojoj sposobnosti da se kreće unazad?",
+        "options": [
+          "Rak",
+          "Kornjača",
+          "Vidra",
+          "Zmija"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji poznati naucnik je otkrio strukturu DNK?",
+        "options": [
+          "Frensis Krik",
+          "Rosalind Franklin",
+          "Gregor Mendel",
+          "Carls Darvin"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji element ima simbol \"Na\"?",
+        "options": [
+          "Magnezijum",
+          "Natrijum",
+          "Neon",
+          "Nikl"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji deo tela ima najvišu koncentraciju receptora za bol u dermisu?",
+        "options": [
+          "Koža šaka",
+          "Koža lica",
+          "Koža tabana",
+          "Koža vrata"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je najvisi planinski vrh u Severnoj Americi?",
+        "options": [
+          "Mont Everest",
+          "Denali",
+          "Kilimandzaro",
+          "Monblan"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je najviši vodopad na svetu?",
+        "options": [
+          "Viktorijini vodopadi",
+          "Nijagarini vodopadi",
+          "Anđeoski vodopad",
+          "Iguazu vodopadi"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja država ima najviše lingvističkih porodica koje su klasifikovane kao neodređene?",
+        "options": [
+          "Papua Nova Gvineja",
+          "Meksiko",
+          "Brazil",
+          "Australija"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Autor romana \"Zločin i kazna\"je?",
+        "options": [
+          "Fjodor Dostojevski",
+          "Lav Tolstoj",
+          "Anton Pavlovič Čehov",
+          "Nikolaj Gogolj"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja planeta ima najizraženiju atmosferu sa ugljen-dioksidom?",
+        "options": [
+          "Venera",
+          "Mars",
+          "Zemlja",
+          "Titan"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781687633.819472",
+    "name": "mm",
+    "date": "17.06.2026 11:13",
+    "timestamp": 1781687633.8195448,
+    "teams": [
+      {
+        "name": "milka",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "pera",
+        "score": 20,
+        "correct_count": 4,
+        "fastest_response": 1.1895079612731934,
+        "response_times": [
+          3.165238618850708,
+          1.7583591938018799,
+          1.8644435405731201,
+          1.1895079612731934,
+          2.566434621810913,
+          1.2916486263275146,
+          1.2907531261444092,
+          2.438385248184204
+        ]
+      },
+      {
+        "name": "juu",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "ana,marko",
+        "score": 0,
+        "correct_count": 0,
+        "fastest_response": null,
+        "response_times": []
+      }
+    ],
+    "questions": [
+      {
+        "question": "What is the capital city of Spain?",
+        "options": [
+          "Madrid",
+          "Seville",
+          "San Marino",
+          "Barcelona"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these colors would you find on the flag of United Kingdom?",
+        "options": [
+          "Green",
+          "Gold",
+          "Black",
+          "Blue"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which word is defined as 'having wooly or crispy hair'?",
+        "options": [
+          "Ulotrichous",
+          "Sprunt",
+          "Kakorrhaphiophobia",
+          "Conjubilant"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In which book series does 'Sirius Black' appear?",
+        "options": [
+          "Sherlock Holmes",
+          "The Dark Tower",
+          "Twilight",
+          "Harry Potter"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "What are the two different values of the square root of 144?",
+        "options": [
+          "12 and 24",
+          "12 and -12",
+          "24 and -24",
+          "144 and -144"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "The iconic song 'Vogue' was a hit by which musician?",
+        "options": [
+          "Nicki Minaj",
+          "Eric Clapton",
+          "Alanis Morissette",
+          "Madonna"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Nasi Lemak is a dish that is most associated with which part of the world?",
+        "options": [
+          "Japan",
+          "Malaysia",
+          "Bhutan",
+          "Iran"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these Latin phrases means 'Overcome evil with good'?",
+        "options": [
+          "Bona fide",
+          "Humilitas occidit superbiam",
+          "Bono malum superate",
+          "Fortiter et fideliter"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In What Environment Did Ichthysaurs Live",
+        "options": [
+          "Jungle",
+          "Desert",
+          "Water",
+          "Arctic"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Who was the leader of the British forces during the Battle of Waterloo?",
+        "options": [
+          "The Earl of Wellington",
+          "The Earl of Marlborough",
+          "The Duke of Wellington",
+          "The Duke of Marlborough"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781687633.7074547",
+    "name": "mm",
+    "date": "17.06.2026 11:13",
+    "timestamp": 1781687633.7075524,
+    "teams": [
+      {
+        "name": "milka",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "pera",
+        "score": 20,
+        "correct_count": 4,
+        "fastest_response": 1.1895079612731934,
+        "response_times": [
+          3.165238618850708,
+          1.7583591938018799,
+          1.8644435405731201,
+          1.1895079612731934,
+          2.566434621810913,
+          1.2916486263275146,
+          1.2907531261444092,
+          2.438385248184204
+        ]
+      },
+      {
+        "name": "juu",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "ana,marko",
+        "score": 0,
+        "correct_count": 0,
+        "fastest_response": null,
+        "response_times": []
+      }
+    ],
+    "questions": [
+      {
+        "question": "What is the capital city of Spain?",
+        "options": [
+          "Madrid",
+          "Seville",
+          "San Marino",
+          "Barcelona"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these colors would you find on the flag of United Kingdom?",
+        "options": [
+          "Green",
+          "Gold",
+          "Black",
+          "Blue"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which word is defined as 'having wooly or crispy hair'?",
+        "options": [
+          "Ulotrichous",
+          "Sprunt",
+          "Kakorrhaphiophobia",
+          "Conjubilant"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In which book series does 'Sirius Black' appear?",
+        "options": [
+          "Sherlock Holmes",
+          "The Dark Tower",
+          "Twilight",
+          "Harry Potter"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "What are the two different values of the square root of 144?",
+        "options": [
+          "12 and 24",
+          "12 and -12",
+          "24 and -24",
+          "144 and -144"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "The iconic song 'Vogue' was a hit by which musician?",
+        "options": [
+          "Nicki Minaj",
+          "Eric Clapton",
+          "Alanis Morissette",
+          "Madonna"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Nasi Lemak is a dish that is most associated with which part of the world?",
+        "options": [
+          "Japan",
+          "Malaysia",
+          "Bhutan",
+          "Iran"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these Latin phrases means 'Overcome evil with good'?",
+        "options": [
+          "Bona fide",
+          "Humilitas occidit superbiam",
+          "Bono malum superate",
+          "Fortiter et fideliter"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In What Environment Did Ichthysaurs Live",
+        "options": [
+          "Jungle",
+          "Desert",
+          "Water",
+          "Arctic"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Who was the leader of the British forces during the Battle of Waterloo?",
+        "options": [
+          "The Earl of Wellington",
+          "The Earl of Marlborough",
+          "The Duke of Wellington",
+          "The Duke of Marlborough"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781687633.5464933",
+    "name": "mm",
+    "date": "17.06.2026 11:13",
+    "timestamp": 1781687633.5465665,
+    "teams": [
+      {
+        "name": "milka",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "pera",
+        "score": 20,
+        "correct_count": 4,
+        "fastest_response": 1.1895079612731934,
+        "response_times": [
+          3.165238618850708,
+          1.7583591938018799,
+          1.8644435405731201,
+          1.1895079612731934,
+          2.566434621810913,
+          1.2916486263275146,
+          1.2907531261444092,
+          2.438385248184204
+        ]
+      },
+      {
+        "name": "juu",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "ana,marko",
+        "score": 0,
+        "correct_count": 0,
+        "fastest_response": null,
+        "response_times": []
+      }
+    ],
+    "questions": [
+      {
+        "question": "What is the capital city of Spain?",
+        "options": [
+          "Madrid",
+          "Seville",
+          "San Marino",
+          "Barcelona"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these colors would you find on the flag of United Kingdom?",
+        "options": [
+          "Green",
+          "Gold",
+          "Black",
+          "Blue"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which word is defined as 'having wooly or crispy hair'?",
+        "options": [
+          "Ulotrichous",
+          "Sprunt",
+          "Kakorrhaphiophobia",
+          "Conjubilant"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In which book series does 'Sirius Black' appear?",
+        "options": [
+          "Sherlock Holmes",
+          "The Dark Tower",
+          "Twilight",
+          "Harry Potter"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "What are the two different values of the square root of 144?",
+        "options": [
+          "12 and 24",
+          "12 and -12",
+          "24 and -24",
+          "144 and -144"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "The iconic song 'Vogue' was a hit by which musician?",
+        "options": [
+          "Nicki Minaj",
+          "Eric Clapton",
+          "Alanis Morissette",
+          "Madonna"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Nasi Lemak is a dish that is most associated with which part of the world?",
+        "options": [
+          "Japan",
+          "Malaysia",
+          "Bhutan",
+          "Iran"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Which of these Latin phrases means 'Overcome evil with good'?",
+        "options": [
+          "Bona fide",
+          "Humilitas occidit superbiam",
+          "Bono malum superate",
+          "Fortiter et fideliter"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "In What Environment Did Ichthysaurs Live",
+        "options": [
+          "Jungle",
+          "Desert",
+          "Water",
+          "Arctic"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Who was the leader of the British forces during the Battle of Waterloo?",
+        "options": [
+          "The Earl of Wellington",
+          "The Earl of Marlborough",
+          "The Duke of Wellington",
+          "The Duke of Marlborough"
+        ],
+        "correct": 2,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781611882.0715704",
+    "name": "JHHJ",
+    "date": "16.06.2026 14:11",
+    "timestamp": 1781611882.0716712,
+    "teams": [
+      {
+        "name": "JJ",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "MN",
+        "score": 10,
+        "correct_count": 4,
+        "fastest_response": 1.1803631782531738,
+        "response_times": [
+          4.574916362762451,
+          1.9758942127227783,
+          2.5096304416656494,
+          2.1408350467681885,
+          2.479471206665039,
+          1.1500556468963623,
+          1.3318150043487549,
+          1.1803631782531738,
+          1.3193128108978271,
+          6.178985357284546
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "question": "Koja je najstarija civilizacija u Americi?",
+        "options": [
+          "Maje",
+          "Inke",
+          "Azteci",
+          "Olmeci"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Ko je napisao \"Zločin i kaznu\"?",
+        "options": [
+          "Fjodor Dostojevski",
+          "Lav Tolstoj",
+          "Anton Pavlović Čehov",
+          "Nikolaj Gogolj"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je glavni grad Kanade?",
+        "options": [
+          "Toronto",
+          "Montreal",
+          "Ottawa",
+          "Vankuver"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Kako se zvao presednik Republike Severne Makedonije krajem 2025.godine?",
+        "options": [
+          "Nikola Zijev",
+          "Stevo Pendarovski",
+          "Zoran Zajev",
+          "Gordana Siljanovska-Davkova"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja životinja je poznata pod latinskim nazivom \"Bos grunniens\"?",
+        "options": [
+          "bizon",
+          "medved",
+          "divlje evropsko govedo-tur",
+          "jak"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Album pod nazivom \" Ljubav\", bio je album koje Ex-Yu grupe?",
+        "options": [
+          "Električni orgazam",
+          "Partibrejkersi",
+          "Bijelo dugme",
+          "EKV"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je poznati brod potonuo 1912. godine?",
+        "options": [
+          "Lusitania",
+          "Titanic",
+          "Queen Mary",
+          "Bismarck"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji element ima simbol \"Na\"?",
+        "options": [
+          "Magnezijum",
+          "Natrijum",
+          "Neon",
+          "Nikl"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja hemijska supstanca se koristi za dezinfekciju vode?",
+        "options": [
+          "Hlor",
+          "Jod",
+          "Kiseonik",
+          "Vodonik"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji sport koristi termin \"knockout\"?",
+        "options": [
+          "Boks",
+          "Fudbal",
+          "Kosarka",
+          "Tenis"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781611881.9873421",
+    "name": "JHHJ",
+    "date": "16.06.2026 14:11",
+    "timestamp": 1781611881.987473,
+    "teams": [
+      {
+        "name": "JJ",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "MN",
+        "score": 10,
+        "correct_count": 4,
+        "fastest_response": 1.1803631782531738,
+        "response_times": [
+          4.574916362762451,
+          1.9758942127227783,
+          2.5096304416656494,
+          2.1408350467681885,
+          2.479471206665039,
+          1.1500556468963623,
+          1.3318150043487549,
+          1.1803631782531738,
+          1.3193128108978271,
+          6.178985357284546
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "question": "Koja je najstarija civilizacija u Americi?",
+        "options": [
+          "Maje",
+          "Inke",
+          "Azteci",
+          "Olmeci"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Ko je napisao \"Zločin i kaznu\"?",
+        "options": [
+          "Fjodor Dostojevski",
+          "Lav Tolstoj",
+          "Anton Pavlović Čehov",
+          "Nikolaj Gogolj"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je glavni grad Kanade?",
+        "options": [
+          "Toronto",
+          "Montreal",
+          "Ottawa",
+          "Vankuver"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Kako se zvao presednik Republike Severne Makedonije krajem 2025.godine?",
+        "options": [
+          "Nikola Zijev",
+          "Stevo Pendarovski",
+          "Zoran Zajev",
+          "Gordana Siljanovska-Davkova"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja životinja je poznata pod latinskim nazivom \"Bos grunniens\"?",
+        "options": [
+          "bizon",
+          "medved",
+          "divlje evropsko govedo-tur",
+          "jak"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Album pod nazivom \" Ljubav\", bio je album koje Ex-Yu grupe?",
+        "options": [
+          "Električni orgazam",
+          "Partibrejkersi",
+          "Bijelo dugme",
+          "EKV"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je poznati brod potonuo 1912. godine?",
+        "options": [
+          "Lusitania",
+          "Titanic",
+          "Queen Mary",
+          "Bismarck"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji element ima simbol \"Na\"?",
+        "options": [
+          "Magnezijum",
+          "Natrijum",
+          "Neon",
+          "Nikl"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja hemijska supstanca se koristi za dezinfekciju vode?",
+        "options": [
+          "Hlor",
+          "Jod",
+          "Kiseonik",
+          "Vodonik"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji sport koristi termin \"knockout\"?",
+        "options": [
+          "Boks",
+          "Fudbal",
+          "Kosarka",
+          "Tenis"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  },
+  {
+    "id": "1781611881.8162205",
+    "name": "JHHJ",
+    "date": "16.06.2026 14:11",
+    "timestamp": 1781611881.8163078,
+    "teams": [
+      {
+        "name": "JJ",
+        "members": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "player_name": "MN",
+        "score": 10,
+        "correct_count": 4,
+        "fastest_response": 1.1803631782531738,
+        "response_times": [
+          4.574916362762451,
+          1.9758942127227783,
+          2.5096304416656494,
+          2.1408350467681885,
+          2.479471206665039,
+          1.1500556468963623,
+          1.3318150043487549,
+          1.1803631782531738,
+          1.3193128108978271,
+          6.178985357284546
+        ]
+      }
+    ],
+    "questions": [
+      {
+        "question": "Koja je najstarija civilizacija u Americi?",
+        "options": [
+          "Maje",
+          "Inke",
+          "Azteci",
+          "Olmeci"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Ko je napisao \"Zločin i kaznu\"?",
+        "options": [
+          "Fjodor Dostojevski",
+          "Lav Tolstoj",
+          "Anton Pavlović Čehov",
+          "Nikolaj Gogolj"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je glavni grad Kanade?",
+        "options": [
+          "Toronto",
+          "Montreal",
+          "Ottawa",
+          "Vankuver"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Kako se zvao presednik Republike Severne Makedonije krajem 2025.godine?",
+        "options": [
+          "Nikola Zijev",
+          "Stevo Pendarovski",
+          "Zoran Zajev",
+          "Gordana Siljanovska-Davkova"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja životinja je poznata pod latinskim nazivom \"Bos grunniens\"?",
+        "options": [
+          "bizon",
+          "medved",
+          "divlje evropsko govedo-tur",
+          "jak"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Album pod nazivom \" Ljubav\", bio je album koje Ex-Yu grupe?",
+        "options": [
+          "Električni orgazam",
+          "Partibrejkersi",
+          "Bijelo dugme",
+          "EKV"
+        ],
+        "correct": 3,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji je poznati brod potonuo 1912. godine?",
+        "options": [
+          "Lusitania",
+          "Titanic",
+          "Queen Mary",
+          "Bismarck"
+        ],
+        "correct": 1,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji element ima simbol \"Na\"?",
+        "options": [
+          "Magnezijum",
+          "Natrijum",
+          "Neon",
+          "Nikl"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koja hemijska supstanca se koristi za dezinfekciju vode?",
+        "options": [
+          "Hlor",
+          "Jod",
+          "Kiseonik",
+          "Vodonik"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      },
+      {
+        "question": "Koji sport koristi termin \"knockout\"?",
+        "options": [
+          "Boks",
+          "Fudbal",
+          "Kosarka",
+          "Tenis"
+        ],
+        "correct": 0,
+        "hint": "Hint nije dostupan."
+      }
+    ],
+    "num_questions": 10
+  }
+]
