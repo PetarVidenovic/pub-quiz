@@ -1,4 +1,4 @@
-# web_main.py - Sa HTTP i WebSocket podrškom
+# web_main.py - Ispravljena verzija sa HTTP podrškom
 
 import json
 import logging
@@ -6,7 +6,6 @@ import asyncio
 import websockets
 import os
 from datetime import datetime
-from http import HTTPStatus
 
 # ========== KONFIGURACIJA ==========
 logging.basicConfig(level=logging.INFO)
@@ -18,6 +17,29 @@ clients = set()
 quiz_active = False
 current_question = 0
 questions = []
+
+# ========== HTTP HENDLER ZA HEALTH CHECK ==========
+async def http_handler(path, request_headers):
+    """
+    Handluje HTTP zahteve (health check).
+    Prima 2 argumenta: path i request_headers
+    """
+    LOGGER.info(f"HTTP zahtev: {path}")
+    
+    # Health check endpoint
+    if path == "/health" or path == "/":
+        return websockets.http11.Response(
+            status_code=200,
+            headers=[("Content-Type", "text/plain")],
+            body=b"OK"
+        )
+    
+    # Sve ostalo - 404
+    return websockets.http11.Response(
+        status_code=404,
+        headers=[("Content-Type", "text/plain")],
+        body=b"Not Found"
+    )
 
 # ========== WEBSOCKET HENDLER ==========
 async def websocket_handler(websocket):
@@ -74,7 +96,6 @@ async def handle_message(websocket, data):
         team_name = data.get('team_name', '')
         answer_index = data.get('answer_index', -1)
         LOGGER.info(f"Odgovor od {team_name}: {answer_index}")
-        # Ovde dodaj logiku za proveru odgovora
         await broadcast({
             'type': 'answer_submitted',
             'team_name': team_name,
@@ -117,29 +138,6 @@ async def send_current_state(websocket):
     }
     await send_to_client(websocket, state)
 
-# ========== HTTP HEALTH CHECK HENDLER ==========
-async def http_handler(request):
-    """Handluje HTTP zahteve (health check)"""
-    path = request.path
-    method = request.method
-    
-    LOGGER.info(f"HTTP zahtev: {method} {path}")
-    
-    # Health check endpoint
-    if path == "/health" or path == "/":
-        return websockets.http11.Response(
-            status_code=HTTPStatus.OK,
-            headers=[("Content-Type", "text/plain")],
-            body=b"OK"
-        )
-    
-    # Sve ostalo - 404
-    return websockets.http11.Response(
-        status_code=HTTPStatus.NOT_FOUND,
-        headers=[("Content-Type", "text/plain")],
-        body=b"Not Found"
-    )
-
 # ========== POKRETANJE SERVERA ==========
 async def main():
     """Pokreće server sa HTTP i WebSocket podrškom"""
@@ -151,9 +149,10 @@ async def main():
         websocket_handler,
         "0.0.0.0",
         port,
-        process_request=http_handler  # OVO JE KLJUČNO!
+        process_request=http_handler  # SADA PRIMA 2 ARGUMENTA!
     ):
         LOGGER.info(f"Server uspešno pokrenut na portu {port}")
+        LOGGER.info(f"Health check: http://0.0.0.0:{port}/health")
         await asyncio.Future()  # Radi zauvek
 
 if __name__ == "__main__":
