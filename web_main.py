@@ -1,4 +1,4 @@
-# web_main.py - Konačno ispravna verzija!
+# web_main.py - ČISTA WebSocket verzija za Render
 
 import json
 import logging
@@ -17,31 +17,6 @@ clients = set()
 quiz_active = False
 current_question = 0
 questions = []
-
-# ========== HTTP HENDLER ZA HEALTH CHECK ==========
-async def http_handler(path, request_headers):
-    """
-    Handluje HTTP zahteve (health check).
-    Prima 2 argumenta: path i request_headers
-    """
-    LOGGER.info(f"HTTP zahtev: {path}")
-    
-    # Health check endpoint
-    if path == "/health" or path == "/":
-        return websockets.http11.Response(
-            status_code=200,
-            reason_phrase="OK",  # OVO JE BITNO!
-            headers=[("Content-Type", "text/plain")],
-            body=b"OK"
-        )
-    
-    # Sve ostalo - 404
-    return websockets.http11.Response(
-        status_code=404,
-        reason_phrase="Not Found",  # OVO JE BITNO!
-        headers=[("Content-Type", "text/plain")],
-        body=b"Not Found"
-    )
 
 # ========== WEBSOCKET HENDLER ==========
 async def websocket_handler(websocket):
@@ -88,7 +63,7 @@ async def handle_message(websocket, data):
     
     elif msg_type == 'buzz':
         team_name = data.get('team_name', '')
-        LOGGER.info(f"BUZZ od tima: {team_name}")
+        LOGGER.info(f"🔔 BUZZ od tima: {team_name}")
         await broadcast({
             'type': 'buzz',
             'team_name': team_name
@@ -98,7 +73,6 @@ async def handle_message(websocket, data):
         team_name = data.get('team_name', '')
         answer_index = data.get('answer_index', -1)
         LOGGER.info(f"Odgovor od {team_name}: {answer_index}")
-        # Ovde dodaj logiku za proveru odgovora
         await broadcast({
             'type': 'answer_submitted',
             'team_name': team_name,
@@ -143,19 +117,16 @@ async def send_current_state(websocket):
 
 # ========== POKRETANJE SERVERA ==========
 async def main():
-    """Pokreće server sa HTTP i WebSocket podrškom"""
+    """Pokreće WebSocket server"""
     port = int(os.environ.get('PORT', 10000))
-    LOGGER.info(f"Pokrećem server na portu {port}")
+    LOGGER.info(f"🚀 Pokrećem WebSocket server na portu {port}")
     
-    # Kreiramo server sa HTTP i WebSocket handler-ima
     async with websockets.serve(
         websocket_handler,
-        "0.0.0.0",  # BITNO: Bind na sve interfejse
-        port,
-        process_request=http_handler
+        "0.0.0.0",
+        port
     ):
         LOGGER.info(f"✅ Server uspešno pokrenut na portu {port}")
-        LOGGER.info(f"🔗 Health check: http://0.0.0.0:{port}/health")
         LOGGER.info(f"🌐 WebSocket: ws://0.0.0.0:{port}")
         await asyncio.Future()  # Radi zauvek
 
