@@ -1,10 +1,12 @@
-# web_main.py - ČISTA WebSocket verzija za Render
+# web_main.py - KONAČNA RADI VERZIJA!
 
 import json
 import logging
 import asyncio
 import websockets
 import os
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import threading
 from datetime import datetime
 
 # ========== KONFIGURACIJA ==========
@@ -18,9 +20,45 @@ quiz_active = False
 current_question = 0
 questions = []
 
+# ========== HTTP SERVER ZA HEALTH CHECK ==========
+class HealthCheckHandler(BaseHTTPRequestHandler):
+    """Handluje HTTP zahteve za Render health check"""
+    
+    def do_GET(self):
+        """Odgovara na GET zahteve"""
+        if self.path == '/health' or self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b'OK')
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def do_HEAD(self):
+        """Odgovara na HEAD zahteve (Render health check)"""
+        if self.path == '/health' or self.path == '/':
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+        else:
+            self.send_response(404)
+            self.end_headers()
+    
+    def log_message(self, format, *args):
+        """Isključuje nepotrebne logove"""
+        pass
+
+def run_http_server(port):
+    """Pokreće HTTP server u pozadinskom thread-u"""
+    server = HTTPServer(('0.0.0.0', port), HealthCheckHandler)
+    LOGGER.info(f"✅ HTTP server za health check pokrenut na portu {port}")
+    server.serve_forever()
+
 # ========== WEBSOCKET HENDLER ==========
 async def websocket_handler(websocket):
     """Glavni WebSocket hendler"""
+    await websocket.accept()
     clients.add(websocket)
     try:
         async for message in websocket:
@@ -117,16 +155,25 @@ async def send_current_state(websocket):
 
 # ========== POKRETANJE SERVERA ==========
 async def main():
-    """Pokreće WebSocket server"""
+    """Pokreće HTTP i WebSocket servere na istom portu"""
     port = int(os.environ.get('PORT', 10000))
-    LOGGER.info(f"🚀 Pokrećem WebSocket server na portu {port}")
+    LOGGER.info(f"🚀 Pokrećem servere na portu {port}")
     
+    # Pokreni HTTP server u pozadinskom thread-u
+    http_thread = threading.Thread(
+        target=run_http_server,
+        args=(port,),
+        daemon=True
+    )
+    http_thread.start()
+    
+    # Pokreni WebSocket server
     async with websockets.serve(
         websocket_handler,
         "0.0.0.0",
         port
     ):
-        LOGGER.info(f"✅ Server uspešno pokrenut na portu {port}")
+        LOGGER.info(f"✅ WebSocket server pokrenut na portu {port}")
         LOGGER.info(f"🌐 WebSocket: ws://0.0.0.0:{port}")
         await asyncio.Future()  # Radi zauvek
 
