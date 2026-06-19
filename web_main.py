@@ -1,4 +1,4 @@
-# web_main.py - Ispravljena verzija sa HTTP podrškom
+# web_main.py - Konačno ispravna verzija!
 
 import json
 import logging
@@ -30,6 +30,7 @@ async def http_handler(path, request_headers):
     if path == "/health" or path == "/":
         return websockets.http11.Response(
             status_code=200,
+            reason_phrase="OK",  # OVO JE BITNO!
             headers=[("Content-Type", "text/plain")],
             body=b"OK"
         )
@@ -37,6 +38,7 @@ async def http_handler(path, request_headers):
     # Sve ostalo - 404
     return websockets.http11.Response(
         status_code=404,
+        reason_phrase="Not Found",  # OVO JE BITNO!
         headers=[("Content-Type", "text/plain")],
         body=b"Not Found"
     )
@@ -96,6 +98,7 @@ async def handle_message(websocket, data):
         team_name = data.get('team_name', '')
         answer_index = data.get('answer_index', -1)
         LOGGER.info(f"Odgovor od {team_name}: {answer_index}")
+        # Ovde dodaj logiku za proveru odgovora
         await broadcast({
             'type': 'answer_submitted',
             'team_name': team_name,
@@ -147,12 +150,13 @@ async def main():
     # Kreiramo server sa HTTP i WebSocket handler-ima
     async with websockets.serve(
         websocket_handler,
-        "0.0.0.0",
+        "0.0.0.0",  # BITNO: Bind na sve interfejse
         port,
-        process_request=http_handler  # SADA PRIMA 2 ARGUMENTA!
+        process_request=http_handler
     ):
-        LOGGER.info(f"Server uspešno pokrenut na portu {port}")
-        LOGGER.info(f"Health check: http://0.0.0.0:{port}/health")
+        LOGGER.info(f"✅ Server uspešno pokrenut na portu {port}")
+        LOGGER.info(f"🔗 Health check: http://0.0.0.0:{port}/health")
+        LOGGER.info(f"🌐 WebSocket: ws://0.0.0.0:{port}")
         await asyncio.Future()  # Radi zauvek
 
 if __name__ == "__main__":
