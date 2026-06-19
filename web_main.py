@@ -1,51 +1,70 @@
-# web_main.py - Bez Pygame, samo WebSocket server
+# web_main.py - Sa HTTP i WebSocket podrškom
 
 import json
 import logging
 import asyncio
 import websockets
-import random
+import os
 from datetime import datetime
+from http import HTTPStatus
 
 # ========== KONFIGURACIJA ==========
 logging.basicConfig(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
 
 # ========== GLOBALNO STANJE ==========
 teams = []
+clients = set()
+quiz_active = False
 current_question = 0
 questions = []
-quiz_active = False
-clients = set()
 
 # ========== WEBSOCKET HENDLER ==========
-async def handler(websocket):
+async def websocket_handler(websocket):
     """Glavni WebSocket hendler"""
     clients.add(websocket)
     try:
         async for message in websocket:
             data = json.loads(message)
             await handle_message(websocket, data)
+    except websockets.exceptions.ConnectionClosed:
+        pass
     finally:
         clients.remove(websocket)
+        LOGGER.info(f"Klijent se odjavio. Aktivni: {len(clients)}")
 
 async def handle_message(websocket, data):
     """Obrada poruka od klijenata"""
     msg_type = data.get('type')
+    LOGGER.info(f"Primljena poruka: {msg_type} od {data.get('team_name', 'nepoznat')}")
     
     if msg_type == 'client_login':
         team_name = data.get('team_name', '')
-        teams.append({
-            'name': team_name,
-            'score': 0,
-            'websocket': websocket
+        player_name = data.get('player_name', '')
+        
+        existing = next((t for t in teams if t['name'] == team_name), None)
+        if existing:
+            existing['websocket'] = websocket
+            existing['player_name'] = player_name
+        else:
+            teams.append({
+                'name': team_name,
+                'player_name': player_name,
+                'score': 0,
+                'websocket': websocket
+            })
+        
+        LOGGER.info(f"Tim registrovan: {team_name}")
+        await send_to_client(websocket, {
+            'type': 'login_success',
+            'team_name': team_name,
+            'message': 'Uspešno prijavljeni!'
         })
-        await broadcast({
-            'type': 'teams_update',
-            'teams': [{'name': t['name'], 'score': t['score']} for t in teams]
-        })
+        await broadcast_teams()
     
     elif msg_type == 'buzz':
         team_name = data.get('team_name', '')
+        LOGGER.info(f"BUZZ od tima: {team_name}")
         await broadcast({
             'type': 'buzz',
             'team_name': team_name
@@ -53,29 +72,94 @@ async def handle_message(websocket, data):
     
     elif msg_type == 'answer':
         team_name = data.get('team_name', '')
-        answer = data.get('answer_index', -1)
-        # Logika za odgovor...
+        answer_index = data.get('answer_index', -1)
+        LOGGER.info(f"Odgovor od {team_name}: {answer_index}")
+        # Ovde dodaj logiku za proveru odgovora
         await broadcast({
             'type': 'answer_submitted',
             'team_name': team_name,
-            'is_correct': True  # Zameni sa stvarnom logikom
+            'answer_index': answer_index,
+            'is_correct': True
         })
+    
+    elif msg_type == 'get_state':
+        await send_current_state(websocket)
+
+async def send_to_client(websocket, message):
+    """Šalje poruku jednom klijentu"""
+    try:
+        await websocket.send(json.dumps(message))
+    except Exception as e:
+        LOGGER.error(f"Greška pri slanju: {e}")
 
 async def broadcast(message):
     """Šalje poruku svim povezanim klijentima"""
     if clients:
         await asyncio.wait([
-            client.send(json.dumps(message))
-            for client in clients
+            asyncio.create_task(client.send(json.dumps(message)))
+            for client in clients.copy()
         ])
+
+async def broadcast_teams():
+    """Šalje ažuriranu listu timova"""
+    await broadcast({
+        'type': 'teams_update',
+        'teams': [{'name': t['name'], 'score': t['score']} for t in teams]
+    })
+
+async def send_current_state(websocket):
+    """Šalje trenutno stanje klijentu"""
+    state = {
+        'type': 'state_update',
+        'teams': [{'name': t['name'], 'score': t['score']} for t in teams],
+        'quiz_active': quiz_active,
+        'total_questions': len(questions)
+    }
+    await send_to_client(websocket, state)
+
+# ========== HTTP HEALTH CHECK HENDLER ==========
+async def http_handler(request):
+    """Handluje HTTP zahteve (health check)"""
+    path = request.path
+    method = request.method
+    
+    LOGGER.info(f"HTTP zahtev: {method} {path}")
+    
+    # Health check endpoint
+    if path == "/health" or path == "/":
+        return websockets.http11.Response(
+            status_code=HTTPStatus.OK,
+            headers=[("Content-Type", "text/plain")],
+            body=b"OK"
+        )
+    
+    # Sve ostalo - 404
+    return websockets.http11.Response(
+        status_code=HTTPStatus.NOT_FOUND,
+        headers=[("Content-Type", "text/plain")],
+        body=b"Not Found"
+    )
 
 # ========== POKRETANJE SERVERA ==========
 async def main():
+    """Pokreće server sa HTTP i WebSocket podrškom"""
     port = int(os.environ.get('PORT', 10000))
-    async with websockets.serve(handler, "0.0.0.0", port):
-        logging.info(f"Server pokrenut na portu {port}")
-        await asyncio.Future()  # Večno radi
+    LOGGER.info(f"Pokrećem server na portu {port}")
+    
+    # Kreiramo server sa HTTP i WebSocket handler-ima
+    async with websockets.serve(
+        websocket_handler,
+        "0.0.0.0",
+        port,
+        process_request=http_handler  # OVO JE KLJUČNO!
+    ):
+        LOGGER.info(f"Server uspešno pokrenut na portu {port}")
+        await asyncio.Future()  # Radi zauvek
 
 if __name__ == "__main__":
-    import os
-    asyncio.run(main())
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        LOGGER.info("Server zaustavljen")
+    except Exception as e:
+        LOGGER.error(f"Greška: {e}")
