@@ -18,6 +18,10 @@ LOGGER = logging.getLogger(__name__)
 # ========== FASTAPI APP ==========
 app = FastAPI()
 
+# ========== STATIČKI FAJLOVI ==========
+# Serviraj index.html i druge fajlove iz trenutnog foldera
+app.mount("/", StaticFiles(directory=".", html=True), name="static")
+
 # ========== GLOBALNO STANJE ==========
 teams: List[Dict] = []
 active_connections: List[WebSocket] = []
