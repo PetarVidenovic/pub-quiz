@@ -6,7 +6,7 @@ import os
 import random
 import asyncio
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
-from fastapi.responses import PlainTextResponse
+from fastapi.responses import PlainTextResponse, FileResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
 from typing import List, Dict
@@ -17,10 +17,6 @@ LOGGER = logging.getLogger(__name__)
 
 # ========== FASTAPI APP ==========
 app = FastAPI()
-
-# ========== STATIČKI FAJLOVI ==========
-# Serviraj index.html i druge fajlove iz trenutnog foldera
-app.mount("/", StaticFiles(directory=".", html=True), name="static")
 
 # ========== GLOBALNO STANJE ==========
 teams: List[Dict] = []
@@ -185,7 +181,8 @@ async def broadcast_teams():
     })
 
 # ========== HTTP ENDPOINTI ==========
-@app.get("/")
+# API rute MORAJU biti pre StaticFiles
+
 @app.get("/health")
 async def health_check():
     """Health check za Render"""
@@ -241,6 +238,20 @@ async def quiz_status():
         "language": current_language,
         "teams": [{'name': t['name'], 'score': t['score']} for t in teams]
     }
+
+# ========== STATIČKI FAJLOVI ==========
+# OVO MORA BITI POSLEDNJE! StaticFiles presreće sve zahteve
+
+@app.get("/")
+async def root():
+    """Vraća index.html za korisnike"""
+    try:
+        return FileResponse("index.html")
+    except:
+        return PlainTextResponse("OK")
+
+# Ako imaš druge statičke fajlove (slike, css, itd.)
+# app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # ========== WEBSOCKET ENDPOINT ==========
 @app.websocket("/ws")
@@ -359,6 +370,7 @@ if __name__ == "__main__":
     LOGGER.info(f"🚀 Pokrećem FastAPI server na portu {port}")
     LOGGER.info(f"🔗 Health check: http://0.0.0.0:{port}/health")
     LOGGER.info(f"🌐 WebSocket: ws://0.0.0.0:{port}/ws")
+    LOGGER.info(f"📄 Root: http://0.0.0.0:{port}/")
     
     uvicorn.run(
         app,
