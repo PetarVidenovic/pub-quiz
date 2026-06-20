@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pub Kviz</title>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #12121e; color: white; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; padding: 20px; }
+        .container { background: #1e1e2d; padding: 30px; border-radius: 20px; max-width: 600px; width: 100%; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
+        h1 { color: #ffd700; text-align: center; margin-bottom: 20px; }
+        h3 { color: #ffd700; margin: 15px 0 10px 0; }
+        input, button { width: 100%; padding: 12px; margin: 8px 0; border: none; border-radius: 10px; font-size: 16px; box-sizing: border-box; }
+        input { background: #2a2a3d; color: white; }
+        button { background: #4a7abf; color: white; font-weight: bold; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #5a8adf; }
+        button:disabled { background: #555; cursor: not-allowed; }
+        #buzzBtn { background: #cc4444; font-size: 24px; padding: 20px; margin: 15px 0; }
+        #buzzBtn:hover:not(:disabled) { background: #ff5555; }
+        .hidden { display: none; }
+        .success { color: #88dd88; }
+        .error { color: #dd8888; }
+        .info { color: #88aadd; }
+        #leaderboardList div { padding: 8px; margin: 3px 0; background: #1a1a2d; border-radius: 8px; display: flex; justify-content: space-between; }
+        #leaderboardList .me { background: #2a3a5d; border-left: 3px solid #ffd700; }
+        .option-btn { background: #2a2a3d; margin: 5px 0; text-align: left; padding: 12px 15px; }
+        .option-btn:hover:not(:disabled) { background: #3a3a5d; }
+        .option-btn.correct { background: #00cc44; }
+        .option-btn.wrong { background: #cc4444; }
+        #questionText { font-size: 20px; margin: 20px 0; padding: 15px; background: #2a2a3d; border-radius: 10px; min-height: 60px; }
+        #status, #buzzStatus { text-align: center; padding: 10px; margin: 10px 0; border-radius: 8px; }
+        #adminPanel { margin-top: 20px; padding: 15px; background: #1a1a2d; border-radius: 10px; border: 1px solid #333; }
+        #adminPanel button { width: auto; padding: 8px 15px; margin: 5px; display: inline-block; }
+        #adminStatus { margin-top: 10px; text-align: center; }
+        .question-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .question-number { color: #aaa; }
+        .timer { color: #ffd700; font-weight: bold; font-size: 18px; }
+        .timer.warning { color: #ff6b6b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 PUB KVIZ</h1>
+        
+        <!-- Prijava -->
+        <div id="joinPanel">
+            <input type="text" id="teamNameInput" placeholder="Ime tima">
+            <input type="text" id="playerNameInput" placeholder="Vaše ime">
+            <button id="joinBtn">Pridruži se</button>
+            <div id="status"></div>
+        </div>
+        
+        <!-- Igra -->
+        <div id="gamePanel" class="hidden">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+                <span>⭐ Poeni: <span id="yourScore">0</span></span>
+                <span id="questionCounter">Pitanje 0/0</span>
+            </div>
+            
+            <div class="question-header">
+                <span class="question-number" id="questionNumber">Pitanje 0</span>
+                <span class="timer" id="timer">⏱ 15s</span>
+            </div>
+            
+            <div id="questionText">Čekamo pitanje...</div>
+            <div id="optionsContainer"></div>
+            
+            <button id="buzzBtn">🔔 BUZZ!</button>
+            <div id="buzzStatus"></div>
+            
+            <h3>🏆 Tabela</h3>
+            <div id="leaderboardList"></div>
+        </div>
+        
+        <!-- Admin panel -->
+        <div id="adminPanel" style="margin-top:20px;padding:15px;background:#1a1a2d;border-radius:10px;border:1px solid #333;">
+            <h3 style="color:#ffd700;margin:0 0 10px 0;">🔧 Administracija</h3>
+            <div style="display:flex;flex-wrap:wrap;gap:5px;">
+                <button onclick="setLanguage('srpski')" style="width:auto;padding:8px 15px;margin:5px;">🇷🇸 Srpski</button>
+                <button onclick="setLanguage('engleski')" style="width:auto;padding:8px 15px;margin:5px;">🇬🇧 Engleski</button>
+                <button onclick="startQuiz(5)" style="width:auto;padding:8px 15px;margin:5px;background:#28a745;">🎯 5 pitanja</button>
+                <button onclick="startQuiz(10)" style="width:auto;padding:8px 15px;margin:5px;background:#28a745;">🎯 10 pitanja</button>
+                <button onclick="startQuiz(20)" style="width:auto;padding:8px 15px;margin:5px;background:#28a745;">🎯 20 pitanja</button>
+            </div>
+            <div id="adminStatus" style="margin-top:10px;text-align:center;font-size:14px;"></div>
+        </div>
+    </div>
+
+    <script>
+        // ========== GLOBALNE PROMENLJIVE ==========
+        let ws = null, teamName = '', playerName = '';
+        let canBuzz = false;
+        let canAnswer = false;
+        let currentQuestion = null;
+        let timerInterval = null;
+        let timeLeft = 15;
+        let isAnswering = false;
+
+        // ========== DOM ELEMENTI ==========
+        const joinPanel = document.getElementById('joinPanel');
+        const gamePanel = document.getElementById('gamePanel');
+        const teamNameInput = document.getElementById('teamNameInput');
+        const playerNameInput = document.getElementById('playerNameInput');
+        const joinBtn = document.getElementById('joinBtn');
+        const buzzBtn = document.getElementById('buzzBtn');
+        const statusDiv = document.getElementById('status');
+        const buzzStatus = document.getElementById('buzzStatus');
+        const questionText = document.getElementById('questionText');
+        const optionsContainer = document.getElementById('optionsContainer');
+        const leaderboardList = document.getElementById('leaderboardList');
+        const yourScore = document.getElementById('yourScore');
+        const questionCounter = document.getElementById('questionCounter');
+        const questionNumber = document.getElementById('questionNumber');
+        const timer = document.getElementById('timer');
+        const adminStatus = document.getElementById('adminStatus');
+
+        // ========== EVENT LISTENERI ==========
+        joinBtn.onclick = joinGame;
+        teamNameInput.onkeypress = (e) => { if (e.key === 'Enter') joinGame(); };
+        playerNameInput.onkeypress = (e) => { if (e.key === 'Enter') joinGame(); };
+        buzzBtn.onclick = buzz;
+
+        // ========== PRIJAVA ==========
+        function joinGame() {
+            teamName = teamNameInput.value.trim();
+            playerName = playerNameInput.value.trim();
+            
+            if (!teamName || !playerName) {
+                showStatus('Unesite ime tima i vaše ime!', 'error');
+                return;
+            }
+            
+            showStatus('Povezivanje...', 'info');
+            
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws`;
+            ws = new WebSocket(wsUrl);
+            
+            ws.onopen = () => {
+                showStatus('✅ Povezani!', 'success');
+                ws.send(JSON.stringify({
+                    type: 'client_login',
+                    team_name: teamName,
+                    player_name: playerName
+                }));
+            };
+            
+            ws.onmessage = (event) => {
+                try {
+                    const data = JSON.parse(event.data);
+                    handleMessage(data);
+                } catch (e) {
+                    console.error('Greška pri parsiranju:', e);
+                }
+            };
+            
+            ws.onerror = () => { showStatus('❌ Greška pri povezivanju', 'error'); };
+            ws.onclose = () => { showStatus('🔌 Konekcija prekinuta', 'error'); };
+        }
+
+        // ========== OBRADA PORUKA ==========
+        function handleMessage(data) {
+            console.log('Poruka:', data.type);
+            
+            switch(data.type) {
+                case 'login_success':
+                    joinPanel.classList.add('hidden');
+                    gamePanel.classList.remove('hidden');
+                    showStatus('✅ Prijavljeni!', 'success');
+                    break;
+                    
+                case 'question':
+                    showQuestion(data);
+                    break;
+                    
+                case 'teams_update':
+                    updateLeaderboard(data.teams);
+                    break;
+                    
+                case 'buzz':
+                    handleBuzz(data);
+                    break;
+                    
+                case 'answer_submitted':
+                    handleAnswerResult(data);
+                    break;
+                    
+                case 'quiz_end':
+                    showQuizEnd();
+                    break;
+                    
+                case 'state_update':
+                    if (data.teams) updateLeaderboard(data.teams);
+                    if (data.total_questions) {
+                        questionCounter.textContent = `Pitanje ${data.current_question || 0}/${data.total_questions}`;
+                    }
+                    break;
+                    
+                case 'error':
+                    showStatus('❌ ' + data.message, 'error');
+                    break;
+                    
+                default:
+                    console.log('Nepoznata poruka:', data);
+            }
+        }
+
+        // ========== PRIKAZ PITANJA ==========
+        function showQuestion(data) {
+            currentQuestion = data;
+            canBuzz = true;
+            canAnswer = false;
+            isAnswering = false;
+            timeLeft = data.time || 15;
+            
+            questionNumber.textContent = `Pitanje ${data.index}/${data.total}`;
+            questionCounter.textContent = `Pitanje ${data.index}/${data.total}`;
+            questionText.textContent = data.question;
+            
+            // Prikaz opcija
+            let html = '';
+            const letters = ['A', 'B', 'C', 'D'];
+            data.options.forEach((option, idx) => {
+                html += `
+                    <button class="option-btn" data-index="${idx}" onclick="selectAnswer(${idx})" disabled>
+                        <strong>${letters[idx]}.</strong> ${option}
+                    </button>
+                `;
+            });
+            optionsContainer.innerHTML = html;
+            
+            // Resetuj buzz
+            buzzBtn.disabled = false;
+            buzzBtn.textContent = '🔔 BUZZ!';
+            buzzStatus.textContent = '';
+            buzzStatus.className = '';
+            
+            // Start timer
+            startTimer();
+        }
+
+        // ========== TIMER ==========
+        function startTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+            timeLeft = currentQuestion.time || 15;
+            timer.textContent = `⏱ ${timeLeft}s`;
+            timer.className = 'timer';
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                timer.textContent = `⏱ ${timeLeft}s`;
+                if (timeLeft <= 5) timer.className = 'timer warning';
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    timer.textContent = '⏱ 0s';
+                    showBuzzStatus('⏰ Vreme je isteklo!', 'error');
+                    buzzBtn.disabled = true;
+                    enableOptions(false);
+                    // Auto prelazak na sledeće pitanje nakon 2s
+                    setTimeout(() => {
+                        // Server će poslati sledeće pitanje
+                    }, 2000);
+                }
+            }, 1000);
+        }
+
+        // ========== BUZZ ==========
+        function buzz() {
+            if (!canBuzz) {
+                showBuzzStatus('⏳ Sačekajte malo!', 'info');
+                return;
+            }
+            
+            canBuzz = false;
+            buzzBtn.disabled = true;
+            showBuzzStatus('⏳ Čekamo odgovor...', 'info');
+            
+            ws.send(JSON.stringify({
+                type: 'buzz',
+                team_name: teamName
+            }));
+        }
+
+        // ========== BUZZ REZULTAT ==========
+        function handleBuzz(data) {
+            if (data.team_name === teamName) {
+                canAnswer = true;
+                isAnswering = true;
+                buzzBtn.textContent = '✅ VAŠ RED!';
+                buzzBtn.disabled = true;
+                showBuzzStatus('✅ Vi ste buzz-ovali! Odaberite odgovor.', 'success');
+                enableOptions(true);
+            } else {
+                showBuzzStatus(`🔔 ${data.team_name} je buzz-ovao!`, 'info');
+                canBuzz = false;
+                buzzBtn.disabled = true;
+            }
+        }
+
+        // ========== ODABIR ODGOVORA ==========
+        function selectAnswer(index) {
+            if (!canAnswer) {
+                showBuzzStatus('⏳ Nije vaš red!', 'error');
+                return;
+            }
+            
+            canAnswer = false;
+            isAnswering = false;
+            enableOptions(false);
+            
+            const responseTime = currentQuestion.time - timeLeft;
+            ws.send(JSON.stringify({
+                type: 'answer',
+                team_name: teamName,
+                answer_index: index,
+                response_time: responseTime
+            }));
+            
+            showBuzzStatus('📤 Odgovor poslat...', 'info');
+        }
+
+        // ========== REZULTAT ODGOVORA ==========
+        function handleAnswerResult(data) {
+            if (data.team_name === teamName) {
+                if (data.is_correct) {
+                    showBuzzStatus('✅ TAČNO! +10 poena!', 'success');
+                } else {
+                    showBuzzStatus(`❌ NETAČNO! -5 poena. Tačan odgovor: ${String.fromCharCode(65 + data.correct_answer)}`, 'error');
+                }
+                // Označi tačan odgovor
+                document.querySelectorAll('.option-btn').forEach((btn, idx) => {
+                    if (idx === data.correct_answer) {
+                        btn.classList.add('correct');
+                    } else if (idx === data.answer_index && !data.is_correct) {
+                        btn.classList.add('wrong');
+                    }
+                    btn.disabled = true;
+                });
+            }
+            
+            if (data.score !== undefined) {
+                yourScore.textContent = data.score;
+            }
+        }
+
+        // ========== KRAJ KVIZA ==========
+        function showQuizEnd() {
+            showBuzzStatus('🏁 KVIZ JE ZAVRŠEN!', 'success');
+            buzzBtn.disabled = true;
+            optionsContainer.innerHTML = '<p style="text-align:center;font-size:18px;">🏆 Kraj kviza! Hvala na igri!</p>';
+            if (timerInterval) clearInterval(timerInterval);
+            timer.textContent = '⏱ 0s';
+        }
+
+        // ========== POMOĆNE FUNKCIJE ==========
+        function enableOptions(enabled) {
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.disabled = !enabled;
+            });
+        }
+
+        function updateLeaderboard(teams) {
+            const sorted = [...teams].sort((a, b) => b.score - a.score);
+            let html = '';
+            sorted.forEach((team, idx) => {
+                const isMe = team.name === teamName;
+                const medal = idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : `${idx+1}.`;
+                html += `
+                    <div class="${isMe ? 'me' : ''}" style="display:flex;justify-content:space-between;padding:8px;margin:3px 0;background:${isMe?'#2a3a5d':'#1a1a2d'};border-radius:8px;">
+                        <span>${medal} ${team.name}</span>
+                        <span style="color:#ffd700;">${team.score}</span>
+                    </div>
+                `;
+            });
+            leaderboardList.innerHTML = html;
+            
+            const myTeam = teams.find(t => t.name === teamName);
+            if (myTeam) yourScore.textContent = myTeam.score;
+        }
+
+        function showStatus(msg, type) {
+            statusDiv.textContent = msg;
+            statusDiv.className = type;
+        }
+
+        function showBuzzStatus(msg, type) {
+            buzzStatus.textContent = msg;
+            buzzStatus.className = type;
+        }
+
+        // ========== ADMIN FUNKCIJE ==========
+        function setLanguage(lang) {
+            adminStatus.textContent = '⏳ Menjam jezik...';
+            fetch('/set_language', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({lang: lang})
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    adminStatus.textContent = `✅ Jezik promenjen na ${lang}. Pitanja: ${data.total_questions}`;
+                } else {
+                    adminStatus.textContent = `❌ Greška: ${data.message}`;
+                }
+            })
+            .catch(e => {
+                adminStatus.textContent = `❌ Greška: ${e.message}`;
+            });
+        }
+
+        function startQuiz(num) {
+            adminStatus.textContent = '⏳ Pokrećem kviz...';
+            fetch('/start_quiz', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({num_questions: num})
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.status === 'ok') {
+                    adminStatus.textContent = `✅ Kviz pokrenut sa ${data.total_questions} pitanja!`;
+                } else {
+                    adminStatus.textContent = `❌ ${data.message}`;
+                }
+            })
+            .catch(e => {
+                adminStatus.textContent = `❌ Greška: ${e.message}`;
+            });
+        }
+    </script>
+</body>
+</html>
